@@ -20,6 +20,7 @@ export function Player() {
   const body = useRef<RapierRigidBody>(null);
   const [, get] = useKeyboardControls<ControlName>();
   const setPosition = useGameStore((s) => s.setPosition);
+  const setHeading = useGameStore((s) => s.setHeading);
 
   const direction = new THREE.Vector3();
   const camDir = new THREE.Vector3();
@@ -58,6 +59,7 @@ export function Player() {
 
     const pos = body.current.translation();
     setPosition([pos.x, pos.y, pos.z]);
+    setHeading(Math.atan2(camDir.x, camDir.z));
 
     targetCamPos.set(
       pos.x + CAMERA_OFFSET.x,

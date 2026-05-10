@@ -10,18 +10,22 @@ export type ZoneId =
 
 interface GameState {
   position: [number, number, number];
+  heading: number;
   zone: ZoneId | null;
   nearbyInteractable: string | null;
   setPosition: (pos: [number, number, number]) => void;
+  setHeading: (yaw: number) => void;
   setZone: (zone: ZoneId | null) => void;
   setNearbyInteractable: (id: string | null) => void;
 }
 
 export const useGameStore = create<GameState>((set) => ({
   position: [0, 1, 0],
+  heading: 0,
   zone: null,
   nearbyInteractable: null,
   setPosition: (pos) => set({ position: pos }),
+  setHeading: (yaw) => set({ heading: yaw }),
   setZone: (zone) => set({ zone }),
   setNearbyInteractable: (id) => set({ nearbyInteractable: id }),
 }));

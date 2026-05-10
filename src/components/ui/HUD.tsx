@@ -25,14 +25,14 @@ export function HUD() {
           <span className="text-amber-300">SPACE</span> jump
         </div>
         <div>
-          <span className="text-amber-300">E</span> interact (soon)
+          <span className="text-amber-300">E</span> interact
         </div>
       </div>
 
       <button
         type="button"
         onClick={toggleSound}
-        className="pointer-events-auto absolute top-3 right-3 rounded-md bg-black/60 px-3 py-2 font-mono text-xs text-white backdrop-blur hover:bg-black/80"
+        className="pointer-events-auto absolute bottom-3 right-3 rounded-md bg-black/60 px-3 py-2 font-mono text-xs text-white backdrop-blur hover:bg-black/80"
       >
         sound: {soundOn ? "ON" : "OFF"}
       </button>
