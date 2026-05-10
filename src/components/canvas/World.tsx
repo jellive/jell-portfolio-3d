@@ -12,13 +12,14 @@ import { ProximityDetector } from "./ProximityDetector";
 
 const SHOW_STATS = process.env.NODE_ENV !== "production";
 
-export default function World() {
+export default function World({ isTouch = false }: { isTouch?: boolean }) {
   return (
     <Canvas
-      shadows
+      shadows={!isTouch}
       camera={{ position: [0, 6, 9], fov: 60, near: 0.1, far: 200 }}
-      dpr={[1, 1.5]}
+      dpr={isTouch ? [1, 1] : [1, 1.5]}
       gl={{ antialias: false, powerPreference: "high-performance" }}
+      performance={{ min: 0.5 }}
     >
       <fog attach="fog" args={["#cfe1ec", 60, 140]} />
 

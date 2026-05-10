@@ -11,6 +11,7 @@ import {
 import * as THREE from "three";
 import type { ControlName } from "@/types/controls";
 import { useGameStore } from "@/stores/gameStore";
+import { useMobileInputStore } from "@/stores/mobileStore";
 
 const SPEED = 5;
 const JUMP_IMPULSE = 6;
@@ -31,6 +32,7 @@ export function Player() {
   useFrame((state, delta) => {
     if (!body.current) return;
     const { forward, backward, left, right, jump } = get();
+    const mobile = useMobileInputStore.getState();
     const linvel = body.current.linvel();
 
     state.camera.getWorldDirection(camDir);
@@ -38,11 +40,16 @@ export function Player() {
     camDir.normalize();
     camRight.crossVectors(camDir, new THREE.Vector3(0, 1, 0)).normalize();
 
+    let fwdAxis = (forward ? 1 : 0) - (backward ? 1 : 0);
+    let rightAxis = (right ? 1 : 0) - (left ? 1 : 0);
+    fwdAxis += -mobile.moveY;
+    rightAxis += mobile.moveX;
+    fwdAxis = THREE.MathUtils.clamp(fwdAxis, -1, 1);
+    rightAxis = THREE.MathUtils.clamp(rightAxis, -1, 1);
+
     direction.set(0, 0, 0);
-    if (forward) direction.add(camDir);
-    if (backward) direction.sub(camDir);
-    if (left) direction.sub(camRight);
-    if (right) direction.add(camRight);
+    direction.addScaledVector(camDir, fwdAxis);
+    direction.addScaledVector(camRight, rightAxis);
 
     if (direction.lengthSq() > 0) {
       direction.normalize().multiplyScalar(SPEED);
@@ -53,7 +60,8 @@ export function Player() {
       true,
     );
 
-    if (jump && Math.abs(linvel.y) < 0.08) {
+    const wantsJump = jump || mobile.jump;
+    if (wantsJump && Math.abs(linvel.y) < 0.08) {
       body.current.applyImpulse({ x: 0, y: JUMP_IMPULSE, z: 0 }, true);
     }
 

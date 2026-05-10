@@ -6,6 +6,8 @@ import { CONTROLS_MAP } from "@/types/controls";
 import { HUD } from "./ui/HUD";
 import { InfoPanel } from "./ui/InfoPanel";
 import { Minimap } from "./ui/Minimap";
+import { MobileControls } from "./ui/MobileControls";
+import { useIsTouchDevice } from "@/lib/useIsTouchDevice";
 
 const World = dynamic(() => import("./canvas/World"), {
   ssr: false,
@@ -22,13 +24,16 @@ const World = dynamic(() => import("./canvas/World"), {
 });
 
 export default function ClientApp() {
+  const isTouch = useIsTouchDevice();
+
   return (
     <KeyboardControls map={CONTROLS_MAP}>
       <div className="relative w-full h-full">
-        <World />
-        <HUD />
+        <World isTouch={isTouch} />
+        <HUD isTouch={isTouch} />
         <Minimap />
         <InfoPanel />
+        {isTouch ? <MobileControls /> : null}
       </div>
     </KeyboardControls>
   );
