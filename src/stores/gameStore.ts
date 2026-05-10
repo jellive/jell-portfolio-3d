@@ -1,12 +1,6 @@
 import { create } from "zustand";
 
-export type ZoneId =
-  | "home"
-  | "skill"
-  | "career"
-  | "projects"
-  | "blog"
-  | "contact";
+export type ZoneId = "home" | "skill" | "career" | "projects" | "contact";
 
 interface GameState {
   position: [number, number, number];
