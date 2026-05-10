@@ -169,4 +169,15 @@ export const PROJECTS: Project[] = [
     shape: "tent",
     position: [-18, 16],
   },
+  {
+    id: "app-promote",
+    name: "jell.kr (app-promote)",
+    emoji: "🌐",
+    blurb:
+      "Next.js 14 포트폴리오 메타 사이트. 23 프로젝트 + 이력서 + 블로그 통합.",
+    url: "https://jell.kr",
+    color: "#8b5cf6",
+    shape: "tower",
+    position: [-20, 20],
+  },
 ];
