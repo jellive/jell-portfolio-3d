@@ -162,6 +162,23 @@ function CareerView({ data: c }: { data: (typeof CAREER)[number] }) {
       <div className="mt-3 text-sm leading-relaxed text-zinc-200">
         {c.blurb}
       </div>
+      {c.subProjects && c.subProjects.length > 0 ? (
+        <div className="mt-4 border-t border-white/10 pt-3">
+          <div className="text-xs uppercase tracking-widest opacity-60 mb-2">
+            주요 프로덕트
+          </div>
+          <ul className="space-y-2">
+            {c.subProjects.map((sp) => (
+              <li key={sp.name} className="text-sm">
+                <div className="font-bold text-amber-200">{sp.name}</div>
+                <div className="text-xs leading-relaxed text-zinc-300">
+                  {sp.blurb}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </>
   );
 }
