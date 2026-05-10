@@ -40,6 +40,8 @@ export default function World({ isTouch = false }: { isTouch?: boolean }) {
         shadow-camera-right={30}
         shadow-camera-top={30}
         shadow-camera-bottom={-30}
+        shadow-bias={-0.0005}
+        shadow-normalBias={0.05}
       />
 
       <Suspense fallback={null}>
