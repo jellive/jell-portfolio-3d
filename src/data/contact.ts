@@ -35,8 +35,8 @@ export const CONTACTS: ContactPoint[] = [
   {
     id: "blog",
     label: "Blog",
-    value: "jellive.kr",
-    href: "https://jellive.kr",
+    value: "blog.jell.kr",
+    href: "https://blog.jell.kr",
     color: "#3b82f6",
     position: [4.5, -20],
   },
