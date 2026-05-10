@@ -83,7 +83,8 @@ export const SKILLS: Skill[] = [
     category: "mobile",
     level: 2,
     color: "#fa7343",
-    blurb: "WidgetKit, ATS, App Store submission flow.",
+    blurb:
+      "클라운지 iOS 앱(KnowRecorder/KnowLounge/Gotalk) + 비주얼신 finiroom + Wecanner WidgetKit.",
     position: [-10, 8],
   },
   {
@@ -92,7 +93,7 @@ export const SKILLS: Skill[] = [
     category: "mobile",
     level: 2,
     color: "#7f52ff",
-    blurb: "크레버스 Android 클라이언트 (러닝포털) + Wecanner WebView.",
+    blurb: "크레버스 Android 클라이언트 — 러닝포털 · 청담올림.",
     position: [-13, 4],
   },
 
