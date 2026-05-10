@@ -23,7 +23,7 @@ pnpm build && pnpm start
 
 - **WASD** / arrow keys — move
 - **Space** — jump
-- **E** / Enter — interact (when near a skill plant)
+- **E** / Enter — interact with nearby zone (skill / career / project / contact)
 - **Esc** — close panel
 - Mobile: virtual joystick + JUMP / E buttons appear automatically
 
@@ -31,4 +31,4 @@ pnpm build && pnpm start
 
 Phase 1 (✅ shipped): voxel terrain, WASD player + physics, Skill Garden, info panel, minimap, mobile touch, chiptune audio.
 
-Phase 2: Career Timeline, Projects Park, Blog Library, Contact Station.
+Phase 2 (✅ shipped): Career Timeline (5 milestones with sub-projects), Projects Park (17 projects), Contact Station (4 mailboxes incl. LinkedIn), pastel sky polish, deploy hardening.
