@@ -14,7 +14,15 @@ export const CONTACTS: ContactPoint[] = [
     value: "@jellive",
     href: "https://github.com/jellive",
     color: "#1f2937",
-    position: [-3, -20],
+    position: [-4.5, -20],
+  },
+  {
+    id: "linkedin",
+    label: "LinkedIn",
+    value: "Han Goon Yoo",
+    href: "https://www.linkedin.com/in/han-goon-yoo-429980113/",
+    color: "#0a66c2",
+    position: [-1.5, -20],
   },
   {
     id: "email",
@@ -22,7 +30,7 @@ export const CONTACTS: ContactPoint[] = [
     value: "jellive7@gmail.com",
     href: "mailto:jellive7@gmail.com",
     color: "#dc2626",
-    position: [0, -20],
+    position: [1.5, -20],
   },
   {
     id: "blog",
@@ -30,6 +38,6 @@ export const CONTACTS: ContactPoint[] = [
     value: "jellive.kr",
     href: "https://jellive.kr",
     color: "#3b82f6",
-    position: [3, -20],
+    position: [4.5, -20],
   },
 ];
