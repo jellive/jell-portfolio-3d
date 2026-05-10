@@ -25,7 +25,7 @@ export const PROJECTS: Project[] = [
     name: "Couple Planner",
     emoji: "💕",
     blurb: "Next.js 커플 일정 공유. Google Calendar 양방향 동기화 + Realtime.",
-    url: "https://couple-planer.jell.kr",
+    url: "https://couple-planner.jell.kr",
     color: "#ec4899",
     shape: "heart",
     position: [-18, -12],
