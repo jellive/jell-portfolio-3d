@@ -8,6 +8,9 @@ import { Terrain } from "./Terrain";
 import { Player } from "./Player";
 import { Decor } from "./Decor";
 import { SkillGarden } from "./SkillGarden";
+import { CareerTimeline } from "./CareerTimeline";
+import { ProjectsPark } from "./ProjectsPark";
+import { ContactStation } from "./ContactStation";
 import { ProximityDetector } from "./ProximityDetector";
 
 const SHOW_STATS = process.env.NODE_ENV !== "production";
@@ -21,13 +24,13 @@ export default function World({ isTouch = false }: { isTouch?: boolean }) {
       gl={{ antialias: false, powerPreference: "high-performance" }}
       performance={{ min: 0.5 }}
     >
-      <fog attach="fog" args={["#cfe1ec", 60, 140]} />
+      <fog attach="fog" args={["#a8c8d8", 70, 160]} />
 
-      <ambientLight intensity={0.55} />
-      <hemisphereLight args={["#bcd9e8", "#3b5530", 0.4]} />
+      <ambientLight intensity={0.5} />
+      <hemisphereLight args={["#9fb8d6", "#3b5530", 0.5]} />
       <directionalLight
-        position={[40, 25, 15]}
-        intensity={1.1}
+        position={[30, 20, -20]}
+        intensity={1.2}
         castShadow
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
@@ -38,11 +41,11 @@ export default function World({ isTouch = false }: { isTouch?: boolean }) {
       />
 
       <Sky
-        sunPosition={[40, 25, 15]}
-        turbidity={3}
-        rayleigh={2}
+        sunPosition={[30, 20, -20]}
+        turbidity={10}
+        rayleigh={3}
         mieCoefficient={0.005}
-        mieDirectionalG={0.8}
+        mieDirectionalG={0.7}
       />
 
       <Suspense fallback={null}>
@@ -50,6 +53,9 @@ export default function World({ isTouch = false }: { isTouch?: boolean }) {
           <Terrain />
           <Decor />
           <SkillGarden />
+          <CareerTimeline />
+          <ProjectsPark />
+          <ContactStation />
           <Player />
           <ProximityDetector />
         </Physics>

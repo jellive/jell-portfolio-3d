@@ -41,8 +41,8 @@ export function HUD({ isTouch = false }: { isTouch?: boolean }) {
       <button
         type="button"
         onClick={onToggleSound}
-        className={`pointer-events-auto absolute rounded-md bg-black/60 px-3 py-2 font-mono text-xs text-white backdrop-blur hover:bg-black/80 ${
-          isTouch ? "top-16 left-3" : "bottom-3 right-3"
+        className={`pointer-events-auto absolute top-16 left-3 rounded-md bg-black/60 px-3 py-2 font-mono text-xs text-white backdrop-blur hover:bg-black/80 ${
+          isTouch ? "top-16 left-3" : ""
         }`}
       >
         sound: {soundOn ? "ON" : "OFF"}

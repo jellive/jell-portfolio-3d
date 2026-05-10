@@ -3,24 +3,13 @@
 import { useEffect, useRef } from "react";
 import { useGameStore } from "@/stores/gameStore";
 import { CATEGORY_META, SKILLS, type SkillCategory } from "@/data/skills";
+import { CAREER } from "@/data/career";
+import { PROJECTS } from "@/data/projects";
+import { CONTACTS } from "@/data/contact";
 
 const SIZE = 168;
 const WORLD_HALF = 24;
 const SCALE = SIZE / (WORLD_HALF * 2);
-
-interface ZoneDot {
-  pos: [number, number];
-  color: string;
-  label: string;
-}
-
-const ZONE_DOTS: ZoneDot[] = [
-  { pos: [0, -3], color: "#c9b88f", label: "H" },
-  { pos: [0, -18], color: "#cd5c5c", label: "C" },
-  { pos: [18, 18], color: "#4a7fc1", label: "P" },
-  { pos: [-18, -18], color: "#7c4a8d", label: "B" },
-  { pos: [18, -18], color: "#3a8a6f", label: "M" },
-];
 
 const CATEGORY_COLOR: Record<SkillCategory, string> = {
   frontend: "#61dafb",
@@ -52,9 +41,9 @@ export function Minimap() {
 
     function draw() {
       if (!ctx) return;
+      const nearby = useGameStore.getState().nearbyInteractable;
 
       ctx.clearRect(0, 0, SIZE, SIZE);
-
       ctx.fillStyle = "#1a2a1d";
       ctx.fillRect(0, 0, SIZE, SIZE);
 
@@ -75,22 +64,61 @@ export function Minimap() {
       ctx.arc(SIZE / 2, SIZE / 2, SIZE * 0.45, 0, Math.PI * 2);
       ctx.fill();
 
-      for (const z of ZONE_DOTS) {
-        const [mx, my] = worldToMap(z.pos[0], z.pos[1]);
-        ctx.fillStyle = z.color;
-        ctx.fillRect(mx - 5, my - 5, 10, 10);
-        ctx.fillStyle = "#000";
-        ctx.font = "bold 8px ui-monospace, monospace";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText(z.label, mx, my + 0.5);
+      ctx.strokeStyle = "rgba(168, 123, 88, 0.5)";
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      const [px0, py0] = worldToMap(18, -1);
+      const [px1, py1] = worldToMap(18, -18);
+      ctx.moveTo(px0, py0);
+      ctx.lineTo(px1, py1);
+      ctx.stroke();
+
+      const [hx, hy] = worldToMap(0, -3);
+      ctx.fillStyle = "#c9b88f";
+      ctx.fillRect(hx - 5, hy - 5, 10, 10);
+      ctx.fillStyle = "#000";
+      ctx.font = "bold 8px ui-monospace, monospace";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("H", hx, hy + 0.5);
+
+      for (const c of CAREER) {
+        const [mx, my] = worldToMap(c.position[0], c.position[1]);
+        ctx.fillStyle = c.color;
+        const isNear = nearby === `career:${c.id}`;
+        const r = isNear ? 4 : 3;
+        ctx.fillRect(mx - r, my - r, r * 2, r * 2);
       }
 
-      const nearby = useGameStore.getState().nearbyInteractable;
+      for (const p of PROJECTS) {
+        const [mx, my] = worldToMap(p.position[0], p.position[1]);
+        ctx.fillStyle = p.color;
+        const isNear = nearby === `project:${p.id}`;
+        const r = isNear ? 4 : 3;
+        ctx.beginPath();
+        ctx.moveTo(mx, my - r);
+        ctx.lineTo(mx + r, my);
+        ctx.lineTo(mx, my + r);
+        ctx.lineTo(mx - r, my);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      for (const c of CONTACTS) {
+        const [mx, my] = worldToMap(c.position[0], c.position[1]);
+        ctx.fillStyle = c.color;
+        const isNear = nearby === `contact:${c.id}`;
+        const r = isNear ? 4 : 3;
+        ctx.beginPath();
+        ctx.arc(mx, my, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
       for (const s of SKILLS) {
         const [mx, my] = worldToMap(s.position[0], s.position[1]);
         ctx.fillStyle = CATEGORY_COLOR[s.category];
-        const r = nearby === s.id ? 3.5 : 2;
+        const isNear = nearby === `skill:${s.id}`;
+        const r = isNear ? 3.5 : 2;
         ctx.beginPath();
         ctx.arc(mx, my, r, 0, Math.PI * 2);
         ctx.fill();
@@ -136,9 +164,12 @@ export function Minimap() {
   return (
     <div className="pointer-events-none absolute top-3 right-3 rounded-md border border-white/15 bg-black/60 p-1 shadow-lg backdrop-blur">
       <canvas ref={canvasRef} aria-label="minimap" />
-      <div className="mt-1 flex flex-wrap gap-1 px-1 pb-0.5 text-[8px] font-mono">
+      <div className="mt-1 flex flex-wrap gap-x-2 gap-y-0.5 px-1 pb-0.5 text-[8px] font-mono opacity-80">
+        <span>■ career</span>
+        <span>◆ project</span>
+        <span>● contact</span>
         {(Object.keys(CATEGORY_META) as SkillCategory[]).map((c) => (
-          <span key={c} className="flex items-center gap-1 opacity-80">
+          <span key={c} className="flex items-center gap-1">
             <span
               className="inline-block h-1.5 w-1.5 rounded-full"
               style={{ background: CATEGORY_COLOR[c] }}

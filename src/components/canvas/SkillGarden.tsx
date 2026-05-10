@@ -7,8 +7,6 @@ import * as THREE from "three";
 import { CATEGORY_META, SKILLS, type Skill } from "@/data/skills";
 import { useGameStore } from "@/stores/gameStore";
 
-const PROXIMITY_RADIUS = 2.2;
-
 function SkillPlant({
   skill,
   highlight,
@@ -117,10 +115,12 @@ export function SkillGarden() {
         ),
       )}
       {SKILLS.map((s) => (
-        <SkillPlant key={s.id} skill={s} highlight={nearby === s.id} />
+        <SkillPlant
+          key={s.id}
+          skill={s}
+          highlight={nearby === `skill:${s.id}`}
+        />
       ))}
     </group>
   );
 }
-
-export { PROXIMITY_RADIUS };

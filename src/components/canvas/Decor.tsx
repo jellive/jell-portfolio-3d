@@ -42,51 +42,10 @@ function HomeZone() {
   );
 }
 
-function ZoneMarker({
-  position,
-  color,
-  label,
-}: {
-  position: [number, number, number];
-  color: string;
-  label: string;
-}) {
-  return (
-    <group position={position}>
-      <StaticBlock position={[0, 0.5, 0]} color={color} size={[2, 1, 2]} />
-      <StaticBlock position={[0, 1.5, 0]} color={color} size={[1.4, 1, 1.4]} />
-      <Text
-        position={[0, 2.6, 0]}
-        fontSize={0.28}
-        color="#fff"
-        outlineWidth={0.03}
-        outlineColor="#000"
-        anchorX="center"
-      >
-        {label}
-      </Text>
-      <Text
-        position={[0, 2.25, 0]}
-        fontSize={0.18}
-        color="#ddd"
-        outlineWidth={0.02}
-        outlineColor="#000"
-        anchorX="center"
-      >
-        coming soon
-      </Text>
-    </group>
-  );
-}
-
 export function Decor() {
   return (
     <group>
       <HomeZone />
-      <ZoneMarker position={[0, 0, -18]} color="#cd5c5c" label="💼 CAREER" />
-      <ZoneMarker position={[18, 0, 18]} color="#4a7fc1" label="🚀 PROJECTS" />
-      <ZoneMarker position={[-18, 0, -18]} color="#7c4a8d" label="📚 BLOG" />
-      <ZoneMarker position={[18, 0, -18]} color="#3a8a6f" label="📬 CONTACT" />
     </group>
   );
 }
