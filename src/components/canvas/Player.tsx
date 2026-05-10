@@ -31,6 +31,8 @@ export function Player() {
     camRight: new THREE.Vector3(),
     targetCamPos: new THREE.Vector3(),
     lookAt: new THREE.Vector3(),
+    smoothedLookAt: new THREE.Vector3(),
+    lookAtInit: false,
   });
 
   useFrame((state, delta) => {
@@ -86,12 +88,16 @@ export function Player() {
       pos.y + CAMERA_OFFSET.y,
       pos.z + CAMERA_OFFSET.z,
     );
-    state.camera.position.lerp(
-      tmpRef.current.targetCamPos,
-      1 - Math.pow(0.001, delta),
-    );
+    const followFactor = 1 - Math.pow(0.001, delta);
+    state.camera.position.lerp(tmpRef.current.targetCamPos, followFactor);
     tmpRef.current.lookAt.set(pos.x, pos.y + 1, pos.z);
-    state.camera.lookAt(tmpRef.current.lookAt);
+    if (!tmpRef.current.lookAtInit) {
+      tmpRef.current.smoothedLookAt.copy(tmpRef.current.lookAt);
+      tmpRef.current.lookAtInit = true;
+    } else {
+      tmpRef.current.smoothedLookAt.lerp(tmpRef.current.lookAt, followFactor);
+    }
+    state.camera.lookAt(tmpRef.current.smoothedLookAt);
   });
 
   return (
