@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { KeyboardControls } from "@react-three/drei";
 import { CONTROLS_MAP } from "@/types/controls";
 import { HUD } from "./ui/HUD";
+import { InfoPanel } from "./ui/InfoPanel";
 
 const World = dynamic(() => import("./canvas/World"), {
   ssr: false,
@@ -25,6 +26,7 @@ export default function ClientApp() {
       <div className="relative w-full h-full">
         <World />
         <HUD />
+        <InfoPanel />
       </div>
     </KeyboardControls>
   );

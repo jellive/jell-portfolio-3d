@@ -1,5 +1,6 @@
 "use client";
 
+import { Text } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 
 interface VoxelBlockProps {
@@ -19,60 +20,73 @@ function StaticBlock({ position, color, size = [1, 1, 1] }: VoxelBlockProps) {
   );
 }
 
+function HomeZone() {
+  return (
+    <group position={[0, 0, -3]}>
+      <StaticBlock position={[0, 0.5, 0]} color="#c9b88f" size={[4, 1, 4]} />
+      <StaticBlock position={[-2, 1.5, 0]} color="#a87b58" size={[0.4, 1, 4]} />
+      <StaticBlock position={[2, 1.5, 0]} color="#a87b58" size={[0.4, 1, 4]} />
+      <StaticBlock position={[0, 1.5, -2]} color="#a87b58" size={[4, 1, 0.4]} />
+      <StaticBlock position={[0, 2.5, 0]} color="#8b4513" size={[5, 1, 5]} />
+      <Text
+        position={[0, 3.4, 0]}
+        fontSize={0.4}
+        color="#fff"
+        outlineWidth={0.04}
+        outlineColor="#000"
+        anchorX="center"
+      >
+        🏠 HOME
+      </Text>
+    </group>
+  );
+}
+
+function ZoneMarker({
+  position,
+  color,
+  label,
+}: {
+  position: [number, number, number];
+  color: string;
+  label: string;
+}) {
+  return (
+    <group position={position}>
+      <StaticBlock position={[0, 0.5, 0]} color={color} size={[2, 1, 2]} />
+      <StaticBlock position={[0, 1.5, 0]} color={color} size={[1.4, 1, 1.4]} />
+      <Text
+        position={[0, 2.6, 0]}
+        fontSize={0.28}
+        color="#fff"
+        outlineWidth={0.03}
+        outlineColor="#000"
+        anchorX="center"
+      >
+        {label}
+      </Text>
+      <Text
+        position={[0, 2.25, 0]}
+        fontSize={0.18}
+        color="#ddd"
+        outlineWidth={0.02}
+        outlineColor="#000"
+        anchorX="center"
+      >
+        coming soon
+      </Text>
+    </group>
+  );
+}
+
 export function Decor() {
   return (
     <group>
-      <group position={[0, 0, 0]}>
-        <StaticBlock
-          position={[-2, 0.5, -2]}
-          color="#c9b88f"
-          size={[4, 1, 4]}
-        />
-        <StaticBlock
-          position={[-2, 1.5, -3.5]}
-          color="#a87b58"
-          size={[4, 1, 1]}
-        />
-        <StaticBlock
-          position={[-2, 2.5, -2]}
-          color="#8b4513"
-          size={[4, 1, 4]}
-        />
-      </group>
-
-      <group position={[10, 0, 6]}>
-        <StaticBlock position={[0, 0.5, 0]} color="#5b8e3e" size={[1, 1, 1]} />
-        <StaticBlock position={[0, 1.5, 0]} color="#5b8e3e" size={[1, 1, 1]} />
-        <StaticBlock position={[0, 2.5, 0]} color="#7ec850" size={[2, 1, 2]} />
-        <StaticBlock position={[0, 3.5, 0]} color="#7ec850" size={[1, 1, 1]} />
-
-        <StaticBlock position={[3, 0.5, 1]} color="#3a6f7a" size={[1, 1, 1]} />
-        <StaticBlock position={[3, 1.5, 1]} color="#a4d4e0" size={[1, 1, 1]} />
-
-        <StaticBlock position={[-3, 0.5, 0]} color="#7c4a8d" size={[1, 1, 1]} />
-        <StaticBlock position={[-3, 1.5, 0]} color="#7c4a8d" size={[1, 1, 1]} />
-        <StaticBlock position={[-3, 2.5, 0]} color="#c79bd6" size={[1, 1, 1]} />
-      </group>
-
-      <group position={[-10, 0, 8]}>
-        <StaticBlock position={[0, 0.5, 0]} color="#444" size={[1, 1, 1]} />
-        <StaticBlock position={[0, 1.5, 0]} color="#666" size={[1, 1, 1]} />
-        <StaticBlock position={[1, 0.5, 0]} color="#444" size={[1, 1, 1]} />
-        <StaticBlock position={[2, 0.5, 0]} color="#444" size={[1, 1, 1]} />
-        <StaticBlock position={[2, 1.5, 0]} color="#666" size={[1, 1, 1]} />
-        <StaticBlock position={[2, 2.5, 0]} color="#888" size={[1, 1, 1]} />
-      </group>
-
-      <group position={[8, 0, -10]}>
-        <StaticBlock position={[0, 0.5, 0]} color="#cd5c5c" size={[3, 1, 3]} />
-        <StaticBlock position={[0, 1.5, 0]} color="#dc7878" size={[3, 1, 3]} />
-        <StaticBlock position={[0, 2.5, 0]} color="#f4a261" size={[2, 1, 2]} />
-      </group>
-
-      <StaticBlock position={[15, 0.5, 0]} color="#aaa" />
-      <StaticBlock position={[-15, 0.5, 0]} color="#aaa" />
-      <StaticBlock position={[0, 0.5, 15]} color="#aaa" />
-      <StaticBlock position={[0, 0.5, -15]} color="#aaa" />
+      <HomeZone />
+      <ZoneMarker position={[0, 0, -18]} color="#cd5c5c" label="💼 CAREER" />
+      <ZoneMarker position={[18, 0, 18]} color="#4a7fc1" label="🚀 PROJECTS" />
+      <ZoneMarker position={[-18, 0, -18]} color="#7c4a8d" label="📚 BLOG" />
+      <ZoneMarker position={[18, 0, -18]} color="#3a8a6f" label="📬 CONTACT" />
     </group>
   );
 }
