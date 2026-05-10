@@ -44,11 +44,11 @@ export const CAREER: CareerEntry[] = [
   {
     id: "2026",
     year: 2026,
-    company: "Azflow",
-    role: "Full-stack",
-    stack: "NestJS · TypeORM · React",
-    blurb: "VC/투자 플랫폼. 펀드/LP/포트폴리오 데이터 도메인 풀스택.",
-    color: "#014a8f",
+    company: "디버스랩",
+    role: "Full-stack Lead (예정)",
+    stack: "AI 영상분석 · Next.js · Python",
+    blurb: "AI 영상분석 SaaS 풀스택 리드. 입사 예정.",
+    color: "#f59e0b",
     position: [18, -17],
   },
 ];
