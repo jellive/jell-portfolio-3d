@@ -24,13 +24,14 @@ export default function World({ isTouch = false }: { isTouch?: boolean }) {
       gl={{ antialias: false, powerPreference: "high-performance" }}
       performance={{ min: 0.5 }}
     >
-      <fog attach="fog" args={["#a8c8d8", 70, 160]} />
+      <fog attach="fog" args={["#e8c8a8", 60, 150]} />
 
-      <ambientLight intensity={0.5} />
-      <hemisphereLight args={["#9fb8d6", "#3b5530", 0.5]} />
+      <ambientLight intensity={0.4} color="#ffd8b8" />
+      <hemisphereLight args={["#ffc890", "#3b5530", 0.55]} />
       <directionalLight
-        position={[30, 20, -20]}
-        intensity={1.2}
+        position={[-10, 18, -15]}
+        intensity={1.15}
+        color="#ffd0a0"
         castShadow
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
@@ -41,11 +42,11 @@ export default function World({ isTouch = false }: { isTouch?: boolean }) {
       />
 
       <Sky
-        sunPosition={[30, 20, -20]}
-        turbidity={10}
+        sunPosition={[-15, 4, -40]}
+        turbidity={6}
         rayleigh={3}
         mieCoefficient={0.005}
-        mieDirectionalG={0.7}
+        mieDirectionalG={0.85}
       />
 
       <Suspense fallback={null}>
