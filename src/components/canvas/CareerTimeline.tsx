@@ -71,7 +71,7 @@ function Path() {
         return (
           <mesh
             key={i}
-            position={[xs, 0.02, z]}
+            position={[xs, 0.05, z]}
             receiveShadow
             rotation={[-Math.PI / 2, 0, 0]}
           >
