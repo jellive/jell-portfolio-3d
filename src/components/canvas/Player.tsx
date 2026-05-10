@@ -17,6 +17,7 @@ import { playJump } from "@/lib/audio";
 const SPEED = 5;
 const JUMP_IMPULSE = 6;
 const CAMERA_OFFSET = new THREE.Vector3(0, 6, 9);
+const UP = new THREE.Vector3(0, 1, 0);
 
 export function Player() {
   const body = useRef<RapierRigidBody>(null);
@@ -24,11 +25,13 @@ export function Player() {
   const setPosition = useGameStore((s) => s.setPosition);
   const setHeading = useGameStore((s) => s.setHeading);
 
-  const direction = new THREE.Vector3();
-  const camDir = new THREE.Vector3();
-  const camRight = new THREE.Vector3();
-  const targetCamPos = new THREE.Vector3();
-  const lookAt = new THREE.Vector3();
+  const tmpRef = useRef({
+    direction: new THREE.Vector3(),
+    camDir: new THREE.Vector3(),
+    camRight: new THREE.Vector3(),
+    targetCamPos: new THREE.Vector3(),
+    lookAt: new THREE.Vector3(),
+  });
 
   useFrame((state, delta) => {
     if (!body.current) return;
@@ -36,10 +39,10 @@ export function Player() {
     const mobile = useMobileInputStore.getState();
     const linvel = body.current.linvel();
 
-    state.camera.getWorldDirection(camDir);
-    camDir.y = 0;
-    camDir.normalize();
-    camRight.crossVectors(camDir, new THREE.Vector3(0, 1, 0)).normalize();
+    state.camera.getWorldDirection(tmpRef.current.camDir);
+    tmpRef.current.camDir.y = 0;
+    tmpRef.current.camDir.normalize();
+    tmpRef.current.camRight.crossVectors(tmpRef.current.camDir, UP).normalize();
 
     let fwdAxis = (forward ? 1 : 0) - (backward ? 1 : 0);
     let rightAxis = (right ? 1 : 0) - (left ? 1 : 0);
@@ -48,16 +51,23 @@ export function Player() {
     fwdAxis = THREE.MathUtils.clamp(fwdAxis, -1, 1);
     rightAxis = THREE.MathUtils.clamp(rightAxis, -1, 1);
 
-    direction.set(0, 0, 0);
-    direction.addScaledVector(camDir, fwdAxis);
-    direction.addScaledVector(camRight, rightAxis);
+    tmpRef.current.direction.set(0, 0, 0);
+    tmpRef.current.direction.addScaledVector(tmpRef.current.camDir, fwdAxis);
+    tmpRef.current.direction.addScaledVector(
+      tmpRef.current.camRight,
+      rightAxis,
+    );
 
-    if (direction.lengthSq() > 0) {
-      direction.normalize().multiplyScalar(SPEED);
+    if (tmpRef.current.direction.lengthSq() > 0) {
+      tmpRef.current.direction.normalize().multiplyScalar(SPEED);
     }
 
     body.current.setLinvel(
-      { x: direction.x, y: linvel.y, z: direction.z },
+      {
+        x: tmpRef.current.direction.x,
+        y: linvel.y,
+        z: tmpRef.current.direction.z,
+      },
       true,
     );
 
@@ -69,16 +79,19 @@ export function Player() {
 
     const pos = body.current.translation();
     setPosition([pos.x, pos.y, pos.z]);
-    setHeading(Math.atan2(camDir.x, camDir.z));
+    setHeading(Math.atan2(tmpRef.current.camDir.x, tmpRef.current.camDir.z));
 
-    targetCamPos.set(
+    tmpRef.current.targetCamPos.set(
       pos.x + CAMERA_OFFSET.x,
       pos.y + CAMERA_OFFSET.y,
       pos.z + CAMERA_OFFSET.z,
     );
-    state.camera.position.lerp(targetCamPos, 1 - Math.pow(0.001, delta));
-    lookAt.set(pos.x, pos.y + 1, pos.z);
-    state.camera.lookAt(lookAt);
+    state.camera.position.lerp(
+      tmpRef.current.targetCamPos,
+      1 - Math.pow(0.001, delta),
+    );
+    tmpRef.current.lookAt.set(pos.x, pos.y + 1, pos.z);
+    state.camera.lookAt(tmpRef.current.lookAt);
   });
 
   return (
