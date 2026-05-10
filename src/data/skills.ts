@@ -28,7 +28,7 @@ export const SKILLS: Skill[] = [
     category: "frontend",
     level: 3,
     color: "#61dafb",
-    blurb: "Built Wecanner, Cookting, Couple Planner, Dev Utils Hub.",
+    blurb: "Cookting · Couple Planner · Dev Utils Hub · app-promote.",
     position: [-12, -10],
   },
   {
@@ -42,11 +42,11 @@ export const SKILLS: Skill[] = [
   },
   {
     id: "vue",
-    label: "Vue 3",
+    label: "Vue.js / Nuxt",
     category: "frontend",
     level: 2,
     color: "#41b883",
-    blurb: "MICE platform refactor at 디지털다임.",
+    blurb: "청담러닝(크레버스) 교육 플랫폼 + 비주얼신 Nuxt 3D 웹 에디터.",
     position: [-10, -8],
   },
   {
@@ -74,7 +74,7 @@ export const SKILLS: Skill[] = [
     category: "mobile",
     level: 2,
     color: "#61dafb",
-    blurb: "Cross-platform prototypes.",
+    blurb: "Time Letter (Expo + EAS Update + Sentry). App Store 출시.",
     position: [-14, 8],
   },
   {
@@ -92,7 +92,7 @@ export const SKILLS: Skill[] = [
     category: "mobile",
     level: 2,
     color: "#7f52ff",
-    blurb: "WebView, Manifest V3, Play Store target SDK.",
+    blurb: "크레버스 Android 클라이언트 (러닝포털) + Wecanner WebView.",
     position: [-13, 4],
   },
 
@@ -107,11 +107,11 @@ export const SKILLS: Skill[] = [
   },
   {
     id: "spring",
-    label: "Kotlin / Spring",
+    label: "Java · Kotlin / Spring",
     category: "backend",
     level: 2,
     color: "#6db33f",
-    blurb: "First-job legacy API rescue at 크레버스.",
+    blurb: "크레버스 백엔드 — 러닝포털·i-Learning·청담올림 운영.",
     position: [14, -8],
   },
   {
