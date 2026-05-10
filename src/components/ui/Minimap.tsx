@@ -162,7 +162,10 @@ export function Minimap() {
   }, []);
 
   return (
-    <div className="pointer-events-none absolute top-3 right-3 rounded-md border border-white/15 bg-black/60 p-1 shadow-lg backdrop-blur">
+    <div
+      className="pointer-events-none absolute top-3 right-3 rounded-md border border-white/15 bg-black/60 p-1 shadow-lg backdrop-blur"
+      style={{ width: SIZE + 8 }}
+    >
       <canvas ref={canvasRef} aria-label="minimap" />
       <div className="mt-1 flex flex-wrap gap-x-2 gap-y-0.5 px-1 pb-0.5 text-[8px] font-mono opacity-80">
         <span>■ career</span>
