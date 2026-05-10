@@ -13,7 +13,7 @@ export const CAREER: CareerEntry[] = [
   {
     id: "2016",
     year: 2016,
-    company: "케이라운지",
+    company: "클라운지",
     role: "iOS Developer (연구원)",
     stack: "Swift · Objective-C · WebRTC",
     blurb:
