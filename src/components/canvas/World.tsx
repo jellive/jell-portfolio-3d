@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { Sky, Stats } from "@react-three/drei";
+import { Stats } from "@react-three/drei";
 import { Physics } from "@react-three/rapier";
 import { Suspense } from "react";
 import { Terrain } from "./Terrain";
@@ -24,13 +24,14 @@ export default function World({ isTouch = false }: { isTouch?: boolean }) {
       gl={{ antialias: false, powerPreference: "high-performance" }}
       performance={{ min: 0.5 }}
     >
-      <fog attach="fog" args={["#e8c8a8", 60, 150]} />
+      <color attach="background" args={["#ffc8a0"]} />
+      <fog attach="fog" args={["#ffc8a0", 50, 140]} />
 
-      <ambientLight intensity={0.4} color="#ffd8b8" />
-      <hemisphereLight args={["#ffc890", "#3b5530", 0.55]} />
+      <ambientLight intensity={0.55} color="#ffe0c0" />
+      <hemisphereLight args={["#ffd0a0", "#3b5530", 0.6]} />
       <directionalLight
         position={[-10, 18, -15]}
-        intensity={1.15}
+        intensity={1.1}
         color="#ffd0a0"
         castShadow
         shadow-mapSize-width={2048}
@@ -39,14 +40,6 @@ export default function World({ isTouch = false }: { isTouch?: boolean }) {
         shadow-camera-right={30}
         shadow-camera-top={30}
         shadow-camera-bottom={-30}
-      />
-
-      <Sky
-        sunPosition={[-15, 4, -40]}
-        turbidity={6}
-        rayleigh={3}
-        mieCoefficient={0.005}
-        mieDirectionalG={0.85}
       />
 
       <Suspense fallback={null}>
