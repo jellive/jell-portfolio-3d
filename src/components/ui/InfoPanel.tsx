@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useUIStore, useGameStore } from "@/stores/gameStore";
 import { SKILLS } from "@/data/skills";
+import { playInteract, playClose } from "@/lib/audio";
 
 export function InfoPanel() {
   const panelOpen = useUIStore((s) => s.panelOpen);
@@ -16,11 +17,16 @@ export function InfoPanel() {
         const target = useGameStore.getState().nearbyInteractable;
         if (current) {
           setPanel(null);
+          playClose();
         } else if (target) {
           setPanel(target);
+          playInteract();
         }
       } else if (e.code === "Escape") {
-        setPanel(null);
+        if (useUIStore.getState().panelOpen) {
+          setPanel(null);
+          playClose();
+        }
       }
     }
     window.addEventListener("keydown", onKey);
@@ -71,7 +77,10 @@ export function InfoPanel() {
       </div>
       <button
         type="button"
-        onClick={() => setPanel(null)}
+        onClick={() => {
+          setPanel(null);
+          playClose();
+        }}
         className="mt-4 rounded bg-white/10 px-3 py-1 text-xs hover:bg-white/20"
       >
         close (E / Esc)

@@ -12,6 +12,7 @@ import * as THREE from "three";
 import type { ControlName } from "@/types/controls";
 import { useGameStore } from "@/stores/gameStore";
 import { useMobileInputStore } from "@/stores/mobileStore";
+import { playJump } from "@/lib/audio";
 
 const SPEED = 5;
 const JUMP_IMPULSE = 6;
@@ -63,6 +64,7 @@ export function Player() {
     const wantsJump = jump || mobile.jump;
     if (wantsJump && Math.abs(linvel.y) < 0.08) {
       body.current.applyImpulse({ x: 0, y: JUMP_IMPULSE, z: 0 }, true);
+      playJump();
     }
 
     const pos = body.current.translation();
