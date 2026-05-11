@@ -6,6 +6,7 @@ import { CATEGORY_META, SKILLS, type SkillCategory } from "@/data/skills";
 import { CAREER } from "@/data/career";
 import { PROJECTS } from "@/data/projects";
 import { CONTACTS } from "@/data/contact";
+import { BLOG } from "@/data/blog";
 
 const SIZE = 168;
 const WORLD_HALF = 24;
@@ -114,6 +115,17 @@ export function Minimap() {
         ctx.fill();
       }
 
+      {
+        const [mx, my] = worldToMap(BLOG.position[0], BLOG.position[1]);
+        const isNear = nearby === `blog:${BLOG.id}`;
+        const r = isNear ? 5 : 4;
+        ctx.fillStyle = "#fbbf24";
+        ctx.fillRect(mx - r, my - r * 0.7, r * 2, r * 1.4);
+        ctx.strokeStyle = "#1f2937";
+        ctx.lineWidth = 1;
+        ctx.strokeRect(mx - r, my - r * 0.7, r * 2, r * 1.4);
+      }
+
       for (const s of SKILLS) {
         const [mx, my] = worldToMap(s.position[0], s.position[1]);
         ctx.fillStyle = CATEGORY_COLOR[s.category];
@@ -171,6 +183,7 @@ export function Minimap() {
         <span>■ career</span>
         <span>◆ project</span>
         <span>● contact</span>
+        <span>▬ blog</span>
         {(Object.keys(CATEGORY_META) as SkillCategory[]).map((c) => (
           <span key={c} className="flex items-center gap-1">
             <span

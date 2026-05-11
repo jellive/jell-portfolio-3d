@@ -7,6 +7,7 @@ import { CAREER } from "@/data/career";
 import { PROJECTS } from "@/data/projects";
 import { CONTACTS } from "@/data/contact";
 import { HOME_INTRO, type HomeIntro } from "@/data/home";
+import { BLOG, type BlogLibrary } from "@/data/blog";
 import { playInteract, playClose } from "@/lib/audio";
 
 type Resolved =
@@ -14,7 +15,8 @@ type Resolved =
   | { type: "skill"; data: (typeof SKILLS)[number] }
   | { type: "career"; data: (typeof CAREER)[number] }
   | { type: "project"; data: (typeof PROJECTS)[number] }
-  | { type: "contact"; data: (typeof CONTACTS)[number] };
+  | { type: "contact"; data: (typeof CONTACTS)[number] }
+  | { type: "blog"; data: BlogLibrary };
 
 function resolve(id: string | null): Resolved | null {
   if (!id) return null;
@@ -38,6 +40,9 @@ function resolve(id: string | null): Resolved | null {
     const data = CONTACTS.find((c) => c.id === key);
     return data ? { type: "contact", data } : null;
   }
+  if (type === "blog") {
+    return key === BLOG.id ? { type: "blog", data: BLOG } : null;
+  }
   return null;
 }
 
@@ -53,6 +58,8 @@ function shortLabel(r: Resolved): string {
       return r.data.name;
     case "contact":
       return r.data.label;
+    case "blog":
+      return r.data.name;
   }
 }
 
@@ -104,6 +111,7 @@ export function InfoPanel() {
       {opened.type === "career" ? <CareerView data={opened.data} /> : null}
       {opened.type === "project" ? <ProjectView data={opened.data} /> : null}
       {opened.type === "contact" ? <ContactView data={opened.data} /> : null}
+      {opened.type === "blog" ? <BlogView data={opened.data} /> : null}
 
       <button
         type="button"
@@ -254,6 +262,56 @@ function ProjectView({ data: p }: { data: (typeof PROJECTS)[number] }) {
           visit ↗
         </a>
       ) : null}
+    </>
+  );
+}
+
+function BlogView({ data }: { data: BlogLibrary }) {
+  return (
+    <>
+      <div className="flex items-center gap-3">
+        <div className="h-10 w-10 grid place-items-center rounded-md border border-white/20 bg-amber-700 text-xl">
+          📚
+        </div>
+        <div>
+          <div className="text-xs uppercase tracking-widest opacity-60">
+            blog library
+          </div>
+          <div className="text-xl font-bold">{data.name}</div>
+        </div>
+      </div>
+      <div className="mt-4 max-h-[50vh] overflow-y-auto pr-1 space-y-3">
+        {data.posts.map((post) => (
+          <a
+            key={post.id}
+            href={post.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block rounded border border-white/10 bg-white/5 p-3 hover:bg-white/10 transition-colors"
+          >
+            <div className="text-sm font-bold text-amber-200">{post.title}</div>
+            <div className="mt-1 text-xs text-zinc-300 leading-relaxed">
+              {post.blurb}
+            </div>
+            <div className="mt-2 flex flex-wrap items-center gap-1 text-[10px] font-mono opacity-70">
+              <span>{post.date}</span>
+              {post.tags.map((tag) => (
+                <span key={tag} className="rounded bg-white/10 px-1.5 py-0.5">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </a>
+        ))}
+      </div>
+      <a
+        href={data.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-4 inline-block rounded bg-amber-300 px-3 py-1.5 text-xs font-bold text-zinc-900 hover:bg-amber-200"
+      >
+        전체 블로그 보기 ↗
+      </a>
     </>
   );
 }

@@ -11,6 +11,7 @@ import { SkillGarden } from "./SkillGarden";
 import { CareerTimeline } from "./CareerTimeline";
 import { ProjectsPark } from "./ProjectsPark";
 import { ContactStation } from "./ContactStation";
+import { BlogLibrary } from "./BlogLibrary";
 import { ProximityDetector } from "./ProximityDetector";
 
 const SHOW_STATS = process.env.NODE_ENV !== "production";
@@ -52,6 +53,7 @@ export default function World({ isTouch = false }: { isTouch?: boolean }) {
           <CareerTimeline />
           <ProjectsPark />
           <ContactStation />
+          <BlogLibrary />
           <Player />
           <ProximityDetector />
         </Physics>
