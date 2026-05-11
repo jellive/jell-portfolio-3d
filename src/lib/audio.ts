@@ -77,6 +77,33 @@ const BGM_BASS = [
 const BPM = 108;
 const STEP = 60 / BPM / 2;
 
+export type BgmZone =
+  | "home"
+  | "skill"
+  | "career"
+  | "projects"
+  | "contact"
+  | "blog";
+
+// Pitch transpose ratio per zone. 1 = base C, lower = darker, higher = brighter.
+const ZONE_TRANSPOSE: Record<BgmZone, number> = {
+  home: 1, // base
+  skill: 1.122, // +1 whole step (D)
+  career: 0.84, // -minor 3rd, more reflective
+  projects: 1.189, // +major 3rd, upbeat
+  contact: 1.5, // +5th, bright finale
+  blog: 0.943, // -1 whole step, quiet
+};
+
+let currentZone: BgmZone = "home";
+let bgmTransposeRatio = 1;
+
+export function setBgmZone(zone: BgmZone) {
+  if (zone === currentZone) return;
+  currentZone = zone;
+  bgmTransposeRatio = ZONE_TRANSPOSE[zone];
+}
+
 function getCtx(): AudioContext | null {
   if (typeof window === "undefined") return null;
   if (ctx) return ctx;
@@ -125,9 +152,24 @@ function scheduleBgmTick() {
     const t = bgmStartTime + bgmStep * STEP;
     const lead = BGM_LEAD[bgmStep % BGM_LEAD.length];
     const bass = BGM_BASS[Math.floor(bgmStep / 2) % BGM_BASS.length];
-    if (lead) blip(NOTE_FREQ[lead], t, STEP * 0.85, "square", bgmGain, 0.35);
+    if (lead)
+      blip(
+        NOTE_FREQ[lead] * bgmTransposeRatio,
+        t,
+        STEP * 0.85,
+        "square",
+        bgmGain,
+        0.35,
+      );
     if (bass && bgmStep % 2 === 0)
-      blip(NOTE_FREQ[bass] / 2, t, STEP * 1.6, "triangle", bgmGain, 0.5);
+      blip(
+        (NOTE_FREQ[bass] / 2) * bgmTransposeRatio,
+        t,
+        STEP * 1.6,
+        "triangle",
+        bgmGain,
+        0.5,
+      );
     bgmStep++;
   }
   bgmTimer = window.setTimeout(scheduleBgmTick, 80);

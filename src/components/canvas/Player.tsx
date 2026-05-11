@@ -12,12 +12,21 @@ import * as THREE from "three";
 import type { ControlName } from "@/types/controls";
 import { useGameStore } from "@/stores/gameStore";
 import { useMobileInputStore } from "@/stores/mobileStore";
-import { playJump, playFootstep } from "@/lib/audio";
+import { playJump, playFootstep, setBgmZone, type BgmZone } from "@/lib/audio";
 
 const SPEED = 5;
 const JUMP_IMPULSE = 6;
 const CAMERA_OFFSET = new THREE.Vector3(0, 6, 9);
 const UP = new THREE.Vector3(0, 1, 0);
+
+function detectZone(x: number, z: number): BgmZone {
+  if (x > 12) return "career";
+  if (x < -8) return "projects";
+  if (z < -16) return "contact";
+  if (x > 2 && x < 10 && z < -10) return "blog";
+  if (Math.abs(x) > 6 || Math.abs(z) > 4) return "skill";
+  return "home";
+}
 
 export function Player() {
   const body = useRef<RapierRigidBody>(null);
@@ -106,6 +115,7 @@ export function Player() {
     const pos = body.current.translation();
     setPosition([pos.x, pos.y, pos.z]);
     setHeading(Math.atan2(tmpRef.current.camDir.x, tmpRef.current.camDir.z));
+    setBgmZone(detectZone(pos.x, pos.z));
 
     tmpRef.current.targetCamPos.set(
       pos.x + CAMERA_OFFSET.x,
