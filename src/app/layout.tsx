@@ -49,7 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className="h-full antialiased">
-      <body className="h-full bg-black text-white overflow-hidden">
+      <body className="h-full bg-[#ffc8a0] text-white overflow-hidden">
         {children}
       </body>
     </html>
