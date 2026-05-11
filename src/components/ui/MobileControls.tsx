@@ -146,6 +146,7 @@ function ActionButton({
     <button
       ref={ref}
       type="button"
+      aria-label={label}
       className={`pointer-events-auto rounded-full border-2 border-white/40 bg-white/20 font-mono text-base font-bold text-white backdrop-blur active:bg-white/40 ${className}`}
       style={{ touchAction: "none" }}
     >
