@@ -183,3 +183,15 @@ export function playClose() {
   blip(NOTE_FREQ.C5, t, 0.08, "square", masterGain, 0.25);
   blip(NOTE_FREQ.G4, t + 0.05, 0.14, "square", masterGain, 0.2);
 }
+
+let lastFootstepAt = 0;
+export function playFootstep() {
+  const c = getCtx();
+  if (!c || !masterGain || !bgmEnabled) return;
+  const now = c.currentTime;
+  if (now - lastFootstepAt < 0.28) return;
+  lastFootstepAt = now;
+  const base = 80 + Math.random() * 30;
+  blip(base, now, 0.05, "triangle", masterGain, 0.18);
+  blip(base * 0.6, now, 0.08, "square", masterGain, 0.08);
+}
