@@ -6,6 +6,7 @@ import { SKILLS } from "@/data/skills";
 import { CAREER } from "@/data/career";
 import { PROJECTS } from "@/data/projects";
 import { CONTACTS } from "@/data/contact";
+import { HOME_INTRO, HOME_POSITION } from "@/data/home";
 
 const PROXIMITY_RADIUS = 2.6;
 const RADIUS_SQ = PROXIMITY_RADIUS * PROXIMITY_RADIUS;
@@ -17,6 +18,11 @@ interface POI {
 }
 
 const POIS: POI[] = [
+  {
+    id: `home:${HOME_INTRO.id}`,
+    x: HOME_POSITION[0],
+    z: HOME_POSITION[1],
+  },
   ...SKILLS.map((s) => ({
     id: `skill:${s.id}`,
     x: s.position[0],

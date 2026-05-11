@@ -6,9 +6,11 @@ import { SKILLS } from "@/data/skills";
 import { CAREER } from "@/data/career";
 import { PROJECTS } from "@/data/projects";
 import { CONTACTS } from "@/data/contact";
+import { HOME_INTRO, type HomeIntro } from "@/data/home";
 import { playInteract, playClose } from "@/lib/audio";
 
 type Resolved =
+  | { type: "home"; data: HomeIntro }
   | { type: "skill"; data: (typeof SKILLS)[number] }
   | { type: "career"; data: (typeof CAREER)[number] }
   | { type: "project"; data: (typeof PROJECTS)[number] }
@@ -17,6 +19,9 @@ type Resolved =
 function resolve(id: string | null): Resolved | null {
   if (!id) return null;
   const [type, key] = id.split(":");
+  if (type === "home") {
+    return key === HOME_INTRO.id ? { type: "home", data: HOME_INTRO } : null;
+  }
   if (type === "skill") {
     const data = SKILLS.find((s) => s.id === key);
     return data ? { type: "skill", data } : null;
@@ -38,6 +43,8 @@ function resolve(id: string | null): Resolved | null {
 
 function shortLabel(r: Resolved): string {
   switch (r.type) {
+    case "home":
+      return `${r.data.alternateName} 소개`;
     case "skill":
       return r.data.label;
     case "career":
@@ -92,6 +99,7 @@ export function InfoPanel() {
 
   return (
     <div className="pointer-events-auto absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(440px,92vw)] rounded-lg border border-white/10 bg-zinc-900/95 p-5 text-white shadow-2xl backdrop-blur">
+      {opened.type === "home" ? <HomeView data={opened.data} /> : null}
       {opened.type === "skill" ? <SkillView data={opened.data} /> : null}
       {opened.type === "career" ? <CareerView data={opened.data} /> : null}
       {opened.type === "project" ? <ProjectView data={opened.data} /> : null}
@@ -108,6 +116,39 @@ export function InfoPanel() {
         close (E / Esc)
       </button>
     </div>
+  );
+}
+
+function HomeView({ data }: { data: HomeIntro }) {
+  return (
+    <>
+      <div className="flex items-center gap-3">
+        <div className="h-10 w-10 grid place-items-center rounded-md border border-white/20 bg-amber-200 text-xl">
+          🏠
+        </div>
+        <div>
+          <div className="text-xs uppercase tracking-widest opacity-60">
+            {data.role}
+          </div>
+          <div className="text-xl font-bold">
+            {data.name}{" "}
+            <span className="text-zinc-400 font-normal">
+              / {data.alternateName}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div className="mt-3 text-xs font-mono text-amber-300">
+        {data.tagline}
+      </div>
+      <div className="mt-3 text-sm leading-relaxed text-zinc-200">
+        {data.blurb}
+      </div>
+      <div className="mt-4 inline-flex items-center gap-2 rounded border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-xs font-mono font-bold text-emerald-300">
+        <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+        {data.status}
+      </div>
+    </>
   );
 }
 
