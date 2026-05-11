@@ -31,4 +31,4 @@ pnpm build && pnpm start
 
 Phase 1 (✅ shipped): voxel terrain, WASD player + physics, Skill Garden, info panel, minimap, mobile touch, chiptune audio.
 
-Phase 2 (✅ shipped): Career Timeline (5 milestones with sub-projects), Projects Park (17 projects), Contact Station (4 mailboxes incl. LinkedIn), pastel sky polish, deploy hardening.
+Phase 2 (✅ shipped): Career Timeline (4 milestones with sub-projects), Projects Park (17 projects), Contact Station (4 mailboxes incl. LinkedIn), pastel sky polish, deploy hardening.

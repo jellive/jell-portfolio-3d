@@ -41,7 +41,7 @@ export const CAREER: CareerEntry[] = [
       },
       {
         name: "ALO",
-        blurb: "클라운지 시절 개발한 추가 교육 서비스.",
+        blurb: "iOS · Android 교육 서비스 앱.",
       },
     ],
   },
