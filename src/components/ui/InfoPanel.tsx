@@ -119,7 +119,6 @@ export function InfoPanel() {
           setPanel(null);
           playClose();
         }}
-        aria-label="Close info panel"
         className="mt-4 rounded bg-white/10 px-3 py-1 text-xs hover:bg-white/20"
       >
         close (E / Esc)

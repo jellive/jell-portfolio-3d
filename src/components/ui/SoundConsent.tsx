@@ -40,7 +40,6 @@ export function SoundConsent() {
           <button
             type="button"
             onClick={() => decide(true)}
-            aria-label="사운드 켜기"
             className="flex-1 rounded bg-amber-300 px-3 py-2 text-sm font-bold text-zinc-900 hover:bg-amber-200"
           >
             켜기
@@ -48,7 +47,6 @@ export function SoundConsent() {
           <button
             type="button"
             onClick={() => decide(false)}
-            aria-label="사운드 끄고 계속"
             className="flex-1 rounded bg-white/10 px-3 py-2 text-sm font-bold hover:bg-white/20"
           >
             지금은 조용히

@@ -41,7 +41,6 @@ export function HUD({ isTouch = false }: { isTouch?: boolean }) {
       <button
         type="button"
         onClick={onToggleSound}
-        aria-label={`Toggle sound (currently ${soundOn ? "on" : "off"})`}
         className="pointer-events-auto absolute top-16 left-3 rounded-md bg-black/60 px-3 py-2 font-mono text-xs text-white backdrop-blur hover:bg-black/80"
       >
         sound: {soundOn ? "ON" : "OFF"}
