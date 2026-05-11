@@ -34,6 +34,10 @@ export function Player() {
     smoothedLookAt: new THREE.Vector3(),
     lookAtInit: false,
   });
+  const avatarRef = useRef<THREE.Group>(null);
+  const legLRef = useRef<THREE.Mesh>(null);
+  const legRRef = useRef<THREE.Mesh>(null);
+  const bodyMeshRef = useRef<THREE.Mesh>(null);
 
   useFrame((state, delta) => {
     if (!body.current) return;
@@ -84,6 +88,21 @@ export function Player() {
       playFootstep();
     }
 
+    if (avatarRef.current) {
+      const heading = Math.atan2(
+        tmpRef.current.camDir.x,
+        tmpRef.current.camDir.z,
+      );
+      avatarRef.current.rotation.y = heading;
+    }
+
+    const t = state.clock.elapsedTime;
+    const swing = moving ? Math.sin(t * 10) * 0.5 : 0;
+    const bob = moving ? Math.abs(Math.sin(t * 10)) * 0.06 : 0;
+    if (legLRef.current) legLRef.current.rotation.x = swing;
+    if (legRRef.current) legRRef.current.rotation.x = -swing;
+    if (bodyMeshRef.current) bodyMeshRef.current.position.y = bob;
+
     const pos = body.current.translation();
     setPosition([pos.x, pos.y, pos.z]);
     setHeading(Math.atan2(tmpRef.current.camDir.x, tmpRef.current.camDir.z));
@@ -115,8 +134,8 @@ export function Player() {
       mass={1}
     >
       <CapsuleCollider args={[0.5, 0.4]} />
-      <group>
-        <mesh castShadow position={[0, 0, 0]}>
+      <group ref={avatarRef}>
+        <mesh ref={bodyMeshRef} castShadow position={[0, 0, 0]}>
           <capsuleGeometry args={[0.4, 1, 4, 12]} />
           <meshStandardMaterial color="#ff6b6b" flatShading />
         </mesh>
@@ -128,6 +147,18 @@ export function Player() {
           <boxGeometry args={[0.08, 0.08, 0.02]} />
           <meshStandardMaterial color="#1a1a1a" />
         </mesh>
+        <group position={[0.18, -0.55, 0]}>
+          <mesh ref={legLRef} castShadow position={[0, -0.25, 0]}>
+            <boxGeometry args={[0.18, 0.5, 0.18]} />
+            <meshStandardMaterial color="#c0392b" flatShading />
+          </mesh>
+        </group>
+        <group position={[-0.18, -0.55, 0]}>
+          <mesh ref={legRRef} castShadow position={[0, -0.25, 0]}>
+            <boxGeometry args={[0.18, 0.5, 0.18]} />
+            <meshStandardMaterial color="#c0392b" flatShading />
+          </mesh>
+        </group>
       </group>
     </RigidBody>
   );
