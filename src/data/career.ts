@@ -39,6 +39,10 @@ export const CAREER: CareerEntry[] = [
         name: "Gotalk",
         blurb: "WebRTC 1:1 / 다대다 영상통화 + 화면공유 + 채팅.",
       },
+      {
+        name: "ALO",
+        blurb: "클라운지 시절 개발한 추가 교육 서비스.",
+      },
     ],
   },
   {

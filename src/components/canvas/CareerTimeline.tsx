@@ -66,7 +66,7 @@ function Path() {
   const xs = 18;
   return (
     <group>
-      {Array.from({ length: 24 }).map((_, i) => {
+      {Array.from({ length: 18 }).map((_, i) => {
         const z = -1 - i;
         return (
           <mesh
