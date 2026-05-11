@@ -7,6 +7,7 @@ import { HUD } from "./ui/HUD";
 import { InfoPanel } from "./ui/InfoPanel";
 import { Minimap } from "./ui/Minimap";
 import { MobileControls } from "./ui/MobileControls";
+import { SoundConsent } from "./ui/SoundConsent";
 import { useIsTouchDevice } from "@/lib/useIsTouchDevice";
 
 const World = dynamic(() => import("./canvas/World"), {
@@ -34,6 +35,7 @@ export default function ClientApp() {
         <Minimap />
         <InfoPanel />
         {isTouch ? <MobileControls /> : null}
+        <SoundConsent />
       </div>
     </KeyboardControls>
   );
