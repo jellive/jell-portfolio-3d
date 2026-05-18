@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 const SITE_URL = "https://jell-portfolio-3d.vercel.app";
@@ -51,6 +52,12 @@ export default function RootLayout({
     <html lang="ko" className="h-full antialiased">
       <body className="h-full bg-[#ffc8a0] text-white overflow-hidden">
         {children}
+        <Script
+          src="https://umami.jell.kr/script.js"
+          data-website-id="f208ade9-555e-48ee-a607-52bd3451f0ea"
+          strategy="afterInteractive"
+          defer
+        />
       </body>
     </html>
   );
