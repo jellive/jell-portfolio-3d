@@ -170,6 +170,17 @@ export const PROJECTS: Project[] = [
     position: [-18, 16],
   },
   {
+    id: "jell-arcade",
+    name: "Jell Arcade",
+    emoji: "🕹",
+    blurb:
+      "Unity 6 WebGL 뱀파이어 서바이버즈. 자동 사격 + 무기 진화 + 온라인 리더보드.",
+    url: "https://arcade.jell.kr",
+    color: "#10b981",
+    shape: "gamepad",
+    position: [-20, 18],
+  },
+  {
     id: "app-promote",
     name: "app.jell.kr (app-promote)",
     emoji: "🌐",
