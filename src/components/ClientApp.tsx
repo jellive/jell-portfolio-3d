@@ -10,6 +10,7 @@ import { MobileControls } from "./ui/MobileControls";
 import { SoundConsent } from "./ui/SoundConsent";
 import { LoadingScreen } from "./ui/LoadingScreen";
 import { GitHubStatsCard } from "./ui/GitHubStatsCard";
+import { KstClock } from "./ui/KstClock";
 import { useIsTouchDevice } from "@/lib/useIsTouchDevice";
 import type { GhStats } from "@/lib/github";
 
@@ -33,6 +34,7 @@ export default function ClientApp({
         <Minimap />
         <InfoPanel />
         <GitHubStatsCard stats={githubStats} />
+        <KstClock />
         {isTouch ? <MobileControls /> : null}
         <SoundConsent />
       </div>
