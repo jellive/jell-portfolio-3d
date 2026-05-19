@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useUIStore, useGameStore } from "@/stores/gameStore";
 import { SKILLS } from "@/data/skills";
 import { CAREER } from "@/data/career";
@@ -233,6 +233,34 @@ function CareerView({ data: c }: { data: (typeof CAREER)[number] }) {
 }
 
 function ProjectView({ data: p }: { data: (typeof PROJECTS)[number] }) {
+  const [playing, setPlaying] = useState(false);
+  const isArcade = p.id === "jell-arcade";
+
+  if (playing && isArcade) {
+    return (
+      <div className="fixed inset-4 z-50 flex flex-col rounded-lg border border-white/20 bg-zinc-950 shadow-2xl">
+        <div className="flex items-center justify-between border-b border-white/10 px-3 py-2">
+          <span className="text-xs font-bold text-amber-200">
+            🕹️ Jell Arcade — playing in voxel world
+          </span>
+          <button
+            type="button"
+            onClick={() => setPlaying(false)}
+            className="rounded bg-white/10 px-2 py-1 text-xs hover:bg-white/20"
+          >
+            close ✕
+          </button>
+        </div>
+        <iframe
+          src="https://arcade.jell.kr/"
+          title="Jell Arcade"
+          className="flex-1 rounded-b-lg border-0"
+          allow="autoplay; gamepad; fullscreen"
+        />
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="flex items-center gap-3">
@@ -252,16 +280,27 @@ function ProjectView({ data: p }: { data: (typeof PROJECTS)[number] }) {
       <div className="mt-3 text-sm leading-relaxed text-zinc-200">
         {p.blurb}
       </div>
-      {p.url ? (
-        <a
-          href={p.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-4 inline-block rounded bg-amber-300 px-3 py-1.5 text-xs font-bold text-zinc-900 hover:bg-amber-200"
-        >
-          visit ↗
-        </a>
-      ) : null}
+      <div className="mt-4 flex flex-wrap gap-2">
+        {isArcade ? (
+          <button
+            type="button"
+            onClick={() => setPlaying(true)}
+            className="inline-block rounded bg-orange-500 px-3 py-1.5 text-xs font-bold text-white hover:bg-orange-400"
+          >
+            ▶ Play here
+          </button>
+        ) : null}
+        {p.url ? (
+          <a
+            href={p.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block rounded bg-amber-300 px-3 py-1.5 text-xs font-bold text-zinc-900 hover:bg-amber-200"
+          >
+            visit ↗
+          </a>
+        ) : null}
+      </div>
     </>
   );
 }
