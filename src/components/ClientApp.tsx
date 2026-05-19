@@ -12,6 +12,7 @@ import { LoadingScreen } from "./ui/LoadingScreen";
 import { GitHubStatsCard } from "./ui/GitHubStatsCard";
 import { KstClock } from "./ui/KstClock";
 import { WeatherCard } from "./ui/WeatherCard";
+import { FpsHud } from "./ui/FpsHud";
 import { useIsTouchDevice } from "@/lib/useIsTouchDevice";
 import type { GhStats } from "@/lib/github";
 import type { Weather } from "@/lib/weather";
@@ -40,6 +41,7 @@ export default function ClientApp({
         <GitHubStatsCard stats={githubStats} />
         <KstClock />
         <WeatherCard data={weather} />
+        <FpsHud />
         {isTouch ? <MobileControls /> : null}
         <SoundConsent />
       </div>
