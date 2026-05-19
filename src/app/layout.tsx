@@ -51,6 +51,45 @@ export default function RootLayout({
   return (
     <html lang="ko" className="h-full antialiased">
       <body className="h-full bg-[#ffc8a0] text-white overflow-hidden">
+        <noscript>
+          <div
+            style={{
+              position: "fixed",
+              inset: 0,
+              display: "grid",
+              placeItems: "center",
+              background: "#0c0c1a",
+              color: "#f1f1f3",
+              fontFamily: "ui-monospace, monospace",
+              padding: "24px",
+              textAlign: "center",
+              zIndex: 1000,
+            }}
+          >
+            <div>
+              <h1
+                style={{
+                  fontSize: "32px",
+                  color: "#ffcb52",
+                  margin: "0 0 12px",
+                }}
+              >
+                JavaScript required
+              </h1>
+              <p style={{ margin: "4px 0", color: "#aab" }}>
+                Jell World is a 3D WebGL portfolio — please enable JavaScript to
+                load the voxel scene.
+              </p>
+              <p style={{ margin: "12px 0", color: "#aab" }}>
+                Or visit{" "}
+                <a href="https://github.com/jellive" style={{ color: "#9cf" }}>
+                  github.com/jellive
+                </a>{" "}
+                for a text bio.
+              </p>
+            </div>
+          </div>
+        </noscript>
         {children}
         <Script
           src="https://umami.jell.kr/script.js"
