@@ -185,10 +185,21 @@ export const PROJECTS: Project[] = [
     name: "app.jell.kr (app-promote)",
     emoji: "🌐",
     blurb:
-      "Next.js 14 포트폴리오 메타 사이트. 24 프로젝트 + 이력서 + 블로그 통합.",
+      "Next.js 14 포트폴리오 메타 사이트. 25 프로젝트 + 이력서 + 블로그 통합.",
     url: "https://app.jell.kr",
     color: "#8b5cf6",
     shape: "tower",
     position: [-20, 20],
+  },
+  {
+    id: "jell-arcade",
+    name: "Jell Arcade",
+    emoji: "🕹️",
+    blurb:
+      "Unity 6 WebGL 게임 컬렉션. Space Survivor + Brick Breaker + Endless Runner.",
+    url: "https://arcade.jell.kr",
+    color: "#f97316",
+    shape: "gamepad",
+    position: [-20, 22],
   },
 ];
