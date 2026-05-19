@@ -13,6 +13,7 @@ import { GitHubStatsCard } from "./ui/GitHubStatsCard";
 import { KstClock } from "./ui/KstClock";
 import { WeatherCard } from "./ui/WeatherCard";
 import { FpsHud } from "./ui/FpsHud";
+import { CopyUrlButton } from "./ui/CopyUrlButton";
 import { useIsTouchDevice } from "@/lib/useIsTouchDevice";
 import type { GhStats } from "@/lib/github";
 import type { Weather } from "@/lib/weather";
@@ -42,6 +43,7 @@ export default function ClientApp({
         <KstClock />
         <WeatherCard data={weather} />
         <FpsHud />
+        <CopyUrlButton />
         {isTouch ? <MobileControls /> : null}
         <SoundConsent />
       </div>
