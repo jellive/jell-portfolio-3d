@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useGameStore, useUIStore } from "@/stores/gameStore";
 import { setSoundEnabled } from "@/lib/audio";
 
@@ -7,6 +8,7 @@ export function HUD({ isTouch = false }: { isTouch?: boolean }) {
   const position = useGameStore((s) => s.position);
   const soundOn = useUIStore((s) => s.soundOn);
   const toggleSound = useUIStore((s) => s.toggleSound);
+  const [hintCollapsed, setHintCollapsed] = useState(false);
 
   function onToggleSound() {
     const next = !useUIStore.getState().soundOn;
@@ -25,16 +27,28 @@ export function HUD({ isTouch = false }: { isTouch?: boolean }) {
       </div>
 
       {!isTouch ? (
-        <div className="absolute bottom-3 left-3 rounded-md bg-black/60 px-3 py-2 font-mono text-[11px] leading-tight text-white backdrop-blur">
-          <div>
-            <span className="text-amber-300">WASD</span> move
-          </div>
-          <div>
-            <span className="text-amber-300">SPACE</span> jump
-          </div>
-          <div>
-            <span className="text-amber-300">E</span> interact
-          </div>
+        <div className="absolute bottom-3 left-3 flex items-end gap-1">
+          {!hintCollapsed ? (
+            <div className="rounded-md bg-black/60 px-3 py-2 font-mono text-[11px] leading-tight text-white backdrop-blur">
+              <div>
+                <span className="text-amber-300">WASD</span> move
+              </div>
+              <div>
+                <span className="text-amber-300">SPACE</span> jump
+              </div>
+              <div>
+                <span className="text-amber-300">E</span> interact
+              </div>
+            </div>
+          ) : null}
+          <button
+            type="button"
+            onClick={() => setHintCollapsed((v) => !v)}
+            aria-label="Toggle keyboard hints"
+            className="pointer-events-auto rounded-md bg-black/60 px-2 py-1 font-mono text-xs text-white backdrop-blur hover:bg-black/80"
+          >
+            ?
+          </button>
         </div>
       ) : null}
 
