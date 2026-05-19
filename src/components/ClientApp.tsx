@@ -16,6 +16,7 @@ import { FpsHud } from "./ui/FpsHud";
 import { CopyUrlButton } from "./ui/CopyUrlButton";
 import { VisitorCounter } from "./ui/VisitorCounter";
 import { GithubFooter } from "./ui/GithubFooter";
+import { RegisterSW } from "./ui/RegisterSW";
 import { useIsTouchDevice } from "@/lib/useIsTouchDevice";
 import type { GhStats } from "@/lib/github";
 import type { Weather } from "@/lib/weather";
@@ -48,6 +49,7 @@ export default function ClientApp({
         <CopyUrlButton />
         <VisitorCounter />
         <GithubFooter />
+        <RegisterSW />
         {isTouch ? <MobileControls /> : null}
         <SoundConsent />
       </div>
