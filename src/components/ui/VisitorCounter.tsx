@@ -26,7 +26,11 @@ export function VisitorCounter() {
 
   if (count === null) return null;
   return (
-    <div className="pointer-events-none absolute top-[315px] right-3 rounded-md bg-black/60 px-3 py-1 font-mono text-[10px] text-white backdrop-blur">
+    <div className="pointer-events-none absolute top-[315px] right-3 flex items-center gap-1.5 rounded-md bg-black/60 px-3 py-1 font-mono text-[10px] text-white backdrop-blur">
+      <span className="relative inline-flex h-1.5 w-1.5">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60"></span>
+        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+      </span>
       visits <span className="text-amber-300">{count}</span>
     </div>
   );
