@@ -14,6 +14,7 @@ import { KstClock } from "./ui/KstClock";
 import { WeatherCard } from "./ui/WeatherCard";
 import { FpsHud } from "./ui/FpsHud";
 import { CopyUrlButton } from "./ui/CopyUrlButton";
+import { VisitorCounter } from "./ui/VisitorCounter";
 import { useIsTouchDevice } from "@/lib/useIsTouchDevice";
 import type { GhStats } from "@/lib/github";
 import type { Weather } from "@/lib/weather";
@@ -44,6 +45,7 @@ export default function ClientApp({
         <WeatherCard data={weather} />
         <FpsHud />
         <CopyUrlButton />
+        <VisitorCounter />
         {isTouch ? <MobileControls /> : null}
         <SoundConsent />
       </div>
