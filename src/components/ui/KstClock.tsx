@@ -22,7 +22,7 @@ export function KstClock() {
 
   if (!time) return null;
   return (
-    <div className="pointer-events-none absolute top-3 left-[200px] rounded-md bg-black/60 px-3 py-2 font-mono text-xs text-white backdrop-blur">
+    <div className="pointer-events-none absolute top-3 left-[200px] hidden sm:block rounded-md bg-black/60 px-3 py-2 font-mono text-xs text-white backdrop-blur">
       <span className="text-amber-300">KST</span> {time}
     </div>
   );
