@@ -90,8 +90,12 @@ export default function World({ isTouch = false }: { isTouch?: boolean }) {
 
   useEffect(() => {
     const update = () => {
+      // Always evaluate in KST so the voxel sky matches the portfolio owner's
+      // wall clock, not the visitor's local timezone.
       const d = new Date();
-      setPal(paletteForHour(d.getHours() + d.getMinutes() / 60));
+      const kstHour = (d.getUTCHours() + 9) % 24;
+      const kstFrac = kstHour + d.getUTCMinutes() / 60;
+      setPal(paletteForHour(kstFrac));
     };
     update();
     const id = setInterval(update, 60_000); // re-eval every minute
