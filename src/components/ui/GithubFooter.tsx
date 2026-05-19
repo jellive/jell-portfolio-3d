@@ -5,7 +5,7 @@ const LINKEDIN = "https://www.linkedin.com/in/han-goon-yoo-429980113/";
 
 export function GithubFooter() {
   return (
-    <div className="pointer-events-auto absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+    <div className="pointer-events-auto absolute bottom-20 sm:bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
       <a
         href={REPO}
         target="_blank"
