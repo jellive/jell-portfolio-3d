@@ -7,7 +7,15 @@ const CACHE = "jell-world-v1";
 const STATIC_RE =
   /\/(_next\/static|favicon|.*\.(?:png|jpg|jpeg|svg|webp|woff2?))(?:\?|$)/i;
 
+const OFFLINE_URL = "/offline.html";
+
 self.addEventListener("install", (e) => {
+  e.waitUntil(
+    caches
+      .open(CACHE)
+      .then((c) => c.add(OFFLINE_URL))
+      .catch(() => {}),
+  );
   self.skipWaiting();
 });
 
@@ -29,6 +37,17 @@ self.addEventListener("fetch", (e) => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
+
+  // HTML navigation requests: try network, fall back to offline.html on failure.
+  if (req.mode === "navigate" || req.destination === "document") {
+    e.respondWith(
+      fetch(req).catch(() =>
+        caches.open(CACHE).then((c) => c.match(OFFLINE_URL)),
+      ),
+    );
+    return;
+  }
+
   if (!STATIC_RE.test(url.pathname)) return;
 
   e.respondWith(
