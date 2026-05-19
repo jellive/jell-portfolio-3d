@@ -11,8 +11,10 @@ import { SoundConsent } from "./ui/SoundConsent";
 import { LoadingScreen } from "./ui/LoadingScreen";
 import { GitHubStatsCard } from "./ui/GitHubStatsCard";
 import { KstClock } from "./ui/KstClock";
+import { WeatherCard } from "./ui/WeatherCard";
 import { useIsTouchDevice } from "@/lib/useIsTouchDevice";
 import type { GhStats } from "@/lib/github";
+import type { Weather } from "@/lib/weather";
 
 const World = dynamic(() => import("./canvas/World"), {
   ssr: false,
@@ -21,8 +23,10 @@ const World = dynamic(() => import("./canvas/World"), {
 
 export default function ClientApp({
   githubStats,
+  weather,
 }: {
   githubStats: GhStats | null;
+  weather: Weather | null;
 }) {
   const isTouch = useIsTouchDevice();
 
@@ -35,6 +39,7 @@ export default function ClientApp({
         <InfoPanel />
         <GitHubStatsCard stats={githubStats} />
         <KstClock />
+        <WeatherCard data={weather} />
         {isTouch ? <MobileControls /> : null}
         <SoundConsent />
       </div>
