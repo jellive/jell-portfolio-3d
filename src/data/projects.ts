@@ -183,9 +183,9 @@ export const PROJECTS: Project[] = [
   {
     id: "jell-arcade",
     name: "Jell Arcade",
-    emoji: "🕹",
+    emoji: "🕹️",
     blurb:
-      "Unity 6 WebGL 뱀파이어 서바이버즈. 자동 사격 + 무기 진화 + 온라인 리더보드.",
+      "Unity 6 WebGL 레트로 게임 컬렉션. Space Survivor + Brick Breaker + Endless Runner + Tetris.",
     url: "https://arcade.jell.kr",
     color: "#10b981",
     shape: "gamepad",
@@ -201,16 +201,5 @@ export const PROJECTS: Project[] = [
     color: "#8b5cf6",
     shape: "tower",
     position: [-20, 20],
-  },
-  {
-    id: "jell-arcade",
-    name: "Jell Arcade",
-    emoji: "🕹️",
-    blurb:
-      "Unity 6 WebGL 게임 컬렉션. Space Survivor + Brick Breaker + Endless Runner.",
-    url: "https://arcade.jell.kr",
-    color: "#f97316",
-    shape: "gamepad",
-    position: [-20, 22],
   },
 ];
