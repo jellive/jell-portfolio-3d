@@ -11,6 +11,17 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
+    id: "false-green",
+    name: "false-green",
+    emoji: "🚦",
+    blurb:
+      "Claude Code Stop 훅 + 벤치마크. 변경의 소비자가 테스트에서 안 돌았으면 '다 됐다'를 막는다. holdout 거짓 완료 3/3 → 0/3.",
+    url: "https://github.com/jellive/false-green",
+    color: "#4ade80",
+    shape: "tower",
+    position: [-20, -16],
+  },
+  {
     id: "wecanner",
     name: "Wecanner",
     emoji: "📅",
