@@ -104,6 +104,28 @@ export const CAREER: CareerEntry[] = [
       },
     ],
   },
+  {
+    id: "2026",
+    year: 2026,
+    company: "네오플랫",
+    role: "Full-stack Developer",
+    stack: "Next.js · Spring Boot · Android · iOS",
+    blurb: "1인가구 주거 플랫폼의 웹·서버·앱(Android/iOS) 풀스택 개발.",
+    color: "#f59e0b",
+    position: [18, -22],
+    subProjects: [
+      {
+        name: "고방",
+        blurb:
+          "1인가구를 위한 주거 플랫폼. 원룸텔·고시원·고시텔·쉐어하우스를 한눈에 비교.",
+      },
+      {
+        name: "위스테이 WESTAY",
+        blurb:
+          "짧은 공간 머묾. 고시원·쉐어하우스·코리빙·게스트하우스·호텔을 한눈에 찾는 서비스.",
+      },
+    ],
+  },
   // {
   //   id: "2026",
   //   year: 2026,

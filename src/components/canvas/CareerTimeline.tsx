@@ -62,11 +62,16 @@ function Milestone({
   );
 }
 
+// 길은 가장 먼 마일스톤 한 칸 너머까지 깐다. 예전엔 18칸 고정이라 새 경력을
+// 추가하면 그 마일스톤만 길 밖에 떨어졌다. (기존 데이터에서는 -17 + 1 = 18칸 그대로)
+const PATH_LENGTH =
+  Math.ceil(-Math.min(...CAREER.map((c) => c.position[1]))) + 1;
+
 function Path() {
   const xs = 18;
   return (
     <group>
-      {Array.from({ length: 18 }).map((_, i) => {
+      {Array.from({ length: PATH_LENGTH }).map((_, i) => {
         const z = -1 - i;
         return (
           <mesh
