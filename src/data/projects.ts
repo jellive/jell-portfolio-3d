@@ -108,7 +108,6 @@ export const PROJECTS: Project[] = [
     emoji: "🛡",
     blurb:
       "보안 위협 인텔리전스. 비동기 크롤러 + YARA/Sigma/DGA + Next.js 대시보드.",
-    url: "https://threat.jell.kr",
     color: "#ef4444",
     shape: "tower",
     position: [-22, 4],
